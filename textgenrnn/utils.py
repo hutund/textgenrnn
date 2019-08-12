@@ -65,7 +65,7 @@ def textgenrnn_generate(model, vocab,
     # If generating word level, must add spaces around each punctuation.
     # https://stackoverflow.com/a/3645946/9314418
     if word_level and prefix:
-        punct = '!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\\n\\t\'‘’“”’–—'
+        punct = '!"#$%&()*+,-./:;<=>?@[\]^`{|}~\\n\\t\'‘’“”’–—'
         prefix = re.sub('([{}])'.format(punct), r' \1 ', prefix)
         prefix_t = [x.lower() for x in prefix.split()]
 
@@ -155,8 +155,8 @@ def textgenrnn_generate(model, vocab,
 
     # If word level, remove spaces around punctuation for cleanliness.
     if word_level:
-        #     left_punct = "!%),.:;?@]_}\\n\\t'"
-        #     right_punct = "$([_\\n\\t'"
+        #     left_punct = "!%),.:;?@]}\\n\\t'"
+        #     right_punct = "$([\\n\\t'"
         punct = '\\n\\t'
         text_joined = re.sub(" ([{}]) ".format(punct), r'\1', text_joined)
         #     text_joined = re.sub(" ([{}])".format(
