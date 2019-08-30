@@ -135,6 +135,10 @@ class textgenrnn:
             train_size = prop_keep
 
         if self.config['word_level']:
+            punct = '!"#$%&()*+,-./:;<=>?@[\]^`{|}~\\n\\t\'‘’“”’–—'
+            for i in range(len(texts)):
+                texts[i] = re.sub('([{}])'.format(punct), r' \1 ', texts[i])
+                texts[i] = re.sub(' {2,}', ' ', texts[i])
             texts = [text_to_word_sequence(text, filters='') for text in texts]
 
         # calculate all combinations of text indices + token indices
